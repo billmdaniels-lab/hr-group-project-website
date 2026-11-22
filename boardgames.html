@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Viewport meta tag is required for mobile responsiveness -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eat Roll Play — Board Games</title>
+  <link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+
+  <main class="menu-container">
+    <!-- Top Navigation: Switches between Food Menu and Board Game Menu -->
+    <nav class="menu-nav" aria-label="Menu navigation">
+      <a href="index.html" class="nav-link">Food Menu</a>
+      <a href="boardgames.html" class="nav-link" aria-current="page">Board Games</a>
+    </nav>
+
+    <!-- Restaurant Logo Header -->
+    <header class="menu-header">
+      <h1 class="brand-title">
+        <img
+          src="images/logo-eatrollplay.webp"
+          alt="Eat Roll Play"
+          class="logo-title-img"
+        >
+      </h1>
+      <img
+        src="images/logo-subtitle.webp"
+        alt="Games, Food & Beer"
+        class="logo-subtitle-img"
+      >
+      <p class="menu-hours">Open Tuesday–Sunday &bull; 11am – 12am</p>
+    </header>
+
+    <!-- Board Game Library -->
+    <section class="menu-section" aria-labelledby="games-heading">
+      <h2 id="games-heading" class="section-title">Games</h2>
+
+      <div class="menu-grid">
+        <!-- Game 1: Ticket to Ride -->
+        <article class="menu-item">
+          <div class="game-header">
+            <h3 class="item-title">Ticket to Ride</h3>
+            <div class="game-tags">
+              <span class="game-tag">Long Game</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Collect coloured train cards to claim railway routes across a map and connect distant cities. Longer routes and destination tickets earn big points.
+          </p>
+        </article>
+
+        <!-- Game 2: Scrabble -->
+        <article class="menu-item">
+          <div class="game-header">
+            <h3 class="item-title">Scrabble</h3>
+            <div class="game-tags">
+              <span class="game-tag">Long Game</span>
+              <span class="game-tag">Trivia &amp; Knowledge</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Draw letter tiles and build interlocking words on a grid for points. Premium board squares, vocabulary, and tile strategy keep matches tight.
+          </p>
+        </article>
+
+        <!-- Game 3: Catan -->
+        <article class="menu-item">
+          <div class="game-header">
+            <h3 class="item-title">Catan</h3>
+            <div class="game-tags">
+              <span class="game-tag">Long Game</span>
+              <span class="game-tag">Strategy</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Gather and trade resources like wood, brick, and wheat to build roads and settlements. Smart negotiation and board placement help reach ten points first.
+          </p>
+        </article>
+
+        <!-- Game 4: Battleship -->
+        <article class="menu-item">
+          <div class="game-header">
+            <h3 class="item-title">Battleship</h3>
+            <div class="game-tags">
+              <span class="game-tag">Two Players</span>
+              <span class="game-tag">Strategy</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Position secret naval ships on a grid and call coordinates to sink the enemy fleet. Smart guessing and patience decide who rules the sea.
+          </p>
+        </article>
+
+        <!-- Game 5: Coup -->
+        <article class="menu-item">
+          <div class="game-header">
+            <h3 class="item-title">Coup</h3>
+            <div class="game-tags">
+              <span class="game-tag">Fast Game</span>
+              <span class="game-tag">Card Game</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Bluff about secret character powers to eliminate rivals in a fast card game. Getting caught in a lie costs a life.
+          </p>
+        </article>
+
+        <!-- Game 6: Codenames -->
+        <article class="menu-item">
+          <div class="game-header">
+            <h3 class="item-title">Codenames</h3>
+            <div class="game-tags">
+              <span class="game-tag">Best For Groups</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Spymasters give one-word clues to help teammates identify secret agents on a word grid.
+          </p>
+        </article>
+
+        <!-- Game 7: Happy Families -->
+        <article class="menu-item">
+          <div class="game-header">
+            <h3 class="item-title">Happy Families</h3>
+            <div class="game-tags">
+              <span class="game-tag">Fast Game</span>
+              <span class="game-tag">Card Game</span>
+              <span class="game-tag">Kid Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Ask opponents for cards to collect complete four-card family sets. Simple rules make it easy for mixed-age groups.
+          </p>
+        </article>
+
+        <!-- Game 8: Uno -->
+        <article class="menu-item">
+          <div class="game-header">
+            <h3 class="item-title">Uno</h3>
+            <div class="game-tags">
+              <span class="game-tag">Best For Groups</span>
+              <span class="game-tag">Card Game</span>
+              <span class="game-tag">Kid Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Race to empty your hand by matching colours or numbers and playing action cards. Skips, reverses, and wilds keep every turn unpredictable.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Game Tag Legend (matches the bottom key on the physical menu) -->
+    <section class="game-legend" aria-labelledby="legend-heading">
+      <h2 id="legend-heading" class="legend-title">Game Guide</h2>
+
+      <ul class="legend-grid">
+        <li class="legend-item">
+          <strong>Fast Games</strong>
+          30 min or less
+        </li>
+        <li class="legend-item">
+          <strong>Two Players</strong>
+          Head-to-head play
+        </li>
+        <li class="legend-item">
+          <strong>Trivia &amp; Knowledge</strong>
+          Words &amp; quick recall
+        </li>
+        <li class="legend-item">
+          <strong>Long Games</strong>
+          60 min or more
+        </li>
+        <li class="legend-item">
+          <strong>Best For Groups</strong>
+          3 players or more
+        </li>
+        <li class="legend-item">
+          <strong>Strategy Games</strong>
+          Tactics &amp; planning
+        </li>
+        <li class="legend-item">
+          <strong>Card Games</strong>
+          Deck &amp; hand play
+        </li>
+        <li class="legend-item">
+          <strong>Kid Friendly</strong>
+          Great for mixed ages
+        </li>
+      </ul>
+    </section>
+  </main>
+
+</body>
+</html>

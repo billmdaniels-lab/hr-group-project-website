@@ -3,24 +3,25 @@
    Define colors, fonts, and spacing in one place for easy updates.
    ========================================================================== */
 :root {
-  --bg-color: #faf9f6;          /* Soft off-white background (easy on the eyes) */
+  --bg-color: #faf9f6;          /* Soft off-white background (matches physical menu) */
   --text-main: #222222;         /* High-contrast charcoal for primary text */
-  --text-muted: #595959;        /* Accessible gray for descriptions */
-  --accent-color: #8b3a3a;      /* Subtle burgundy for headings and dividers */
-  --border-color: #dcdcdc;      /* Light gray for subtle separator lines */
-  
+  --text-muted: #555555;        /* Accessible dark gray for descriptions */
+  --accent-color: #8b261d;      /* Deep red pulled from the Eat Roll Play logo outline */
+  --accent-green: #148040;      /* Emerald green pulled from the d20 and subtitle logo */
+  --border-color: #d8d4cc;      /* Warm light gray for subtle separator lines */
+
   --font-serif: Georgia, 'Times New Roman', serif;
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  
-  --max-width: 1000px;          /* Prevents the menu from stretching too wide on large monitors */
+
+  --max-width: 1000px;          /* Prevents menus from stretching too wide on large monitors */
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 2.5rem;
 }
 
 /* ==========================================================================
-   2. BASE & RESET STYLES
-   Standardizes spacing and box-sizing across different browsers and devices.
+   2. BASE, RESET & BACKGROUND WATERMARK
+   Standardizes spacing and places logo-picture as a faint backdrop.
    ========================================================================== */
 *,
 *::before,
@@ -30,23 +31,80 @@
   padding: 0;
 }
 
-body {
+/* Background color goes on html so the fixed backdrop sits above it but below text */
+html {
   background-color: var(--bg-color);
+}
+
+body {
+  position: relative;
+  z-index: 0;                   /* Creates a stacking context for the backdrop */
   color: var(--text-main);
   font-family: var(--font-sans);
   line-height: 1.5;
   padding: var(--spacing-md);
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
+/* Faint, fixed background illustration using logo-picture */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;                     /* Stretches across the full viewport */
+  /* Note: "../" steps up out of the css/ folder to reach the images/ folder */
+  background-image: url('../images/logo-picture.webp');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: min(85vw, 560px); /* Fits phones cleanly and caps size on PC */
+  opacity: 0.12;                /* Faint but visible — adjust between 0.08 and 0.20 */
+  pointer-events: none;         /* Prevents the backdrop from blocking clicks or text selection */
+  z-index: -1;                  /* Places the image behind all menu text */
+}
+
 /* ==========================================================================
-   3. MENU CONTAINER & HEADER
-   Centers the menu on the page and styles the restaurant title/hours.
+   3. PAGE NAVIGATION BAR
+   Simple top links to switch between the Food Menu and Board Game Menu.
+   ========================================================================== */
+.menu-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.nav-link {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--accent-color);
+  border: 1.5px solid var(--accent-color);
+  border-radius: 999px;         /* Pill-shaped button style */
+  padding: 0.45rem 1.25rem;
+  background-color: rgba(250, 249, 246, 0.85);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  background-color: var(--accent-color);
+  color: #ffffff;
+}
+
+/* Highlights whichever menu page the visitor is currently viewing */
+.nav-link[aria-current="page"] {
+  background-color: var(--accent-color);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   4. MENU CONTAINER & LOGO HEADER
+   Centers the menu and sizes the Eat Roll Play title and subtitle graphics.
    ========================================================================== */
 .menu-container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--spacing-md) 0;
+  padding: var(--spacing-sm) 0 var(--spacing-lg);
 }
 
 .menu-header {
@@ -56,23 +114,36 @@ body {
   border-bottom: 2px solid var(--accent-color);
 }
 
-.restaurant-name {
-  font-family: var(--font-serif);
-  font-size: 2.25rem;
-  color: var(--accent-color);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+/* Removes extra space around the logo image inside the h1 */
+.brand-title {
+  line-height: 0;
 }
 
-.menu-subtitle {
+.logo-title-img {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 480px;             /* Keeps the logo crisp and proportional on desktop */
+  height: auto;
+}
+
+.logo-subtitle-img {
+  display: block;
+  margin: -1.5rem auto 0;       /* Pulls the subtitle up to offset blank space above the text */
+  width: 78%;
+  max-width: 340px;
+  height: auto;
+}
+
+.menu-hours {
   color: var(--text-muted);
   font-size: 0.95rem;
-  margin-top: var(--spacing-sm);
+  margin-top: 0.75rem;
 }
 
 /* ==========================================================================
-   4. MENU SECTIONS & CATEGORIES
-   Groups dishes into sections (e.g., Starters, Mains, Drinks).
+   5. MENU SECTIONS & GRID LAYOUT
+   Shared across both the Food Menu and Board Game Menu.
    ========================================================================== */
 .menu-section {
   margin-bottom: var(--spacing-lg);
@@ -85,9 +156,11 @@ body {
   margin-bottom: var(--spacing-md);
   padding-bottom: 0.25rem;
   border-bottom: 1px solid var(--border-color);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-/* Grid wrapper for items: defaults to 1 column on mobile phones */
+/* Defaults to 1 column on phones */
 .menu-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -95,8 +168,8 @@ body {
 }
 
 /* ==========================================================================
-   5. INDIVIDUAL MENU ITEMS
-   Styles the dish title, dotted leader line, price, and description.
+   6. INDIVIDUAL FOOD MENU ITEMS
+   Styles dish names, dotted leaders, prices, descriptions, and dietary tags.
    ========================================================================== */
 .menu-item {
   display: flex;
@@ -112,12 +185,12 @@ body {
 }
 
 .item-title {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: var(--text-main);
 }
 
-/* Optional visual dots connecting the dish name to the price */
+/* Optional visual dots connecting dish names to prices */
 .item-dots {
   flex-grow: 1;
   border-bottom: 1px dotted var(--border-color);
@@ -128,58 +201,138 @@ body {
   font-weight: 700;
   font-size: 1.05rem;
   color: var(--text-main);
-  white-space: nowrap; /* Prevents the price from breaking onto two lines */
+  white-space: nowrap;
 }
 
 .item-description {
   color: var(--text-muted);
   font-size: 0.925rem;
-  margin-top: 0.25rem;
+  margin-top: 0.3rem;
 }
 
-/* Small badges for dietary notes like (V), (GF), or (Spicy) */
+/* Small badges for food dietary notes like (V) and (GF) */
 .dietary-tag {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
   text-transform: uppercase;
   color: var(--accent-color);
   border: 1px solid var(--accent-color);
   border-radius: 3px;
   padding: 0.05rem 0.35rem;
-  margin-left: 0.4rem;
+  margin-left: 0.35rem;
   vertical-align: middle;
 }
 
 /* ==========================================================================
-   6. RESPONSIVE MEDIA QUERIES (TABLET & DESKTOP)
-   Switches the item layout from 1 column to 2 columns on wider screens.
+   7. BOARD GAME MENU STYLES (TAGS & LEGEND)
+   Adapts the physical board game menu icons into lightweight digital badges.
+   ========================================================================== */
+.game-header {
+  display: flex;
+  flex-wrap: wrap;              /* Wraps tags neatly on narrow phone screens */
+  align-items: center;
+  gap: 0.4rem 0.65rem;
+}
+
+.game-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+/* Category pills matching the green accent from the logo */
+.game-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--accent-green);
+  border: 1px solid var(--accent-green);
+  background-color: rgba(250, 249, 246, 0.85);
+  border-radius: 4px;
+  padding: 0.1rem 0.45rem;
+}
+
+/* Bottom legend explaining what each board game tag means */
+.game-legend {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 2px solid var(--accent-color);
+}
+
+.legend-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--accent-color);
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 2 columns on mobile phones */
+.legend-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  text-align: center;
+}
+
+.legend-item {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.legend-item strong {
+  display: block;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   8. RESPONSIVE MEDIA QUERIES (TABLET & DESKTOP)
+   Switches menus from 1 column to 2 columns and expands the legend to 4 columns.
    ========================================================================== */
 @media (min-width: 768px) {
   body {
     padding: var(--spacing-lg);
   }
 
-  .restaurant-name {
-    font-size: 3rem;
+  .logo-subtitle-img {
+    margin-top: -2.25rem;       /* Tighter spacing when images render larger on PC */
   }
 
   .menu-grid {
     grid-template-columns: repeat(2, 1fr); /* 2 equal columns */
-    column-gap: 3rem;                      /* Extra breathing room between columns */
-    row-gap: 1.75rem;
+    column-gap: 3rem;
+    row-gap: 1.85rem;
+  }
+
+  .legend-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns x 2 rows on desktop */
+    gap: 1.25rem;
   }
 }
 
 /* ==========================================================================
-   7. PRINT STYLES
-   Ensures the menu prints cleanly on standard paper if needed.
+   9. PRINT STYLES
+   Hides the digital nav bar and cleans up colors if printed on paper.
    ========================================================================== */
 @media print {
-  body {
+  html {
     background-color: #ffffff;
+  }
+
+  body {
     color: #000000;
     padding: 0;
+  }
+
+  .menu-nav {
+    display: none;
   }
 
   .menu-grid {
