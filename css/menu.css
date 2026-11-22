@@ -1,0 +1,189 @@
+/* ==========================================================================
+   1. CSS VARIABLES (THEME SETUP)
+   Define colors, fonts, and spacing in one place for easy updates.
+   ========================================================================== */
+:root {
+  --bg-color: #faf9f6;          /* Soft off-white background (easy on the eyes) */
+  --text-main: #222222;         /* High-contrast charcoal for primary text */
+  --text-muted: #595959;        /* Accessible gray for descriptions */
+  --accent-color: #8b3a3a;      /* Subtle burgundy for headings and dividers */
+  --border-color: #dcdcdc;      /* Light gray for subtle separator lines */
+  
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  --max-width: 1000px;          /* Prevents the menu from stretching too wide on large monitors */
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2.5rem;
+}
+
+/* ==========================================================================
+   2. BASE & RESET STYLES
+   Standardizes spacing and box-sizing across different browsers and devices.
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  padding: var(--spacing-md);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   3. MENU CONTAINER & HEADER
+   Centers the menu on the page and styles the restaurant title/hours.
+   ========================================================================== */
+.menu-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--spacing-md) 0;
+}
+
+.menu-header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.restaurant-name {
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  color: var(--accent-color);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.menu-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: var(--spacing-sm);
+}
+
+/* ==========================================================================
+   4. MENU SECTIONS & CATEGORIES
+   Groups dishes into sections (e.g., Starters, Mains, Drinks).
+   ========================================================================== */
+.menu-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--accent-color);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Grid wrapper for items: defaults to 1 column on mobile phones */
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+/* ==========================================================================
+   5. INDIVIDUAL MENU ITEMS
+   Styles the dish title, dotted leader line, price, and description.
+   ========================================================================== */
+.menu-item {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Row containing the Dish Name, Dotted Line, and Price */
+.item-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.item-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* Optional visual dots connecting the dish name to the price */
+.item-dots {
+  flex-grow: 1;
+  border-bottom: 1px dotted var(--border-color);
+  margin: 0 0.25rem;
+}
+
+.item-price {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-main);
+  white-space: nowrap; /* Prevents the price from breaking onto two lines */
+}
+
+.item-description {
+  color: var(--text-muted);
+  font-size: 0.925rem;
+  margin-top: 0.25rem;
+}
+
+/* Small badges for dietary notes like (V), (GF), or (Spicy) */
+.dietary-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 3px;
+  padding: 0.05rem 0.35rem;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+   6. RESPONSIVE MEDIA QUERIES (TABLET & DESKTOP)
+   Switches the item layout from 1 column to 2 columns on wider screens.
+   ========================================================================== */
+@media (min-width: 768px) {
+  body {
+    padding: var(--spacing-lg);
+  }
+
+  .restaurant-name {
+    font-size: 3rem;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 equal columns */
+    column-gap: 3rem;                      /* Extra breathing room between columns */
+    row-gap: 1.75rem;
+  }
+}
+
+/* ==========================================================================
+   7. PRINT STYLES
+   Ensures the menu prints cleanly on standard paper if needed.
+   ========================================================================== */
+@media print {
+  body {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 0;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 2rem;
+  }
+}
