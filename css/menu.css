@@ -293,6 +293,54 @@ body::before {
 }
 
 /* ==========================================================================
+   7B. BOARD GAME FILTER BAR
+   Responsive pill buttons for filtering games by tag.
+   ========================================================================== */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;              /* Wraps buttons onto new rows cleanly on phones */
+  gap: 0.45rem;
+  margin-bottom: 0.75rem;
+}
+
+.filter-btn {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-green);
+  background-color: rgba(250, 249, 246, 0.9);
+  border: 1.5px solid var(--accent-green);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.filter-btn:hover,
+.filter-btn:focus-visible {
+  background-color: var(--accent-green);
+  color: #ffffff;
+}
+
+/* Highlights whichever filter button is currently active */
+.filter-btn[aria-pressed="true"] {
+  background-color: var(--accent-green);
+  color: #ffffff;
+}
+
+.filter-status {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: var(--spacing-md);
+}
+
+/* IMPORTANT: Because .menu-item uses display: flex, we must explicitly tell
+   the browser to hide it when JavaScript adds the "hidden" attribute. */
+.menu-item[hidden] {
+  display: none;
+}
+
+/* ==========================================================================
    8. RESPONSIVE MEDIA QUERIES (TABLET & DESKTOP)
    Switches menus from 1 column to 2 columns and expands the legend to 4 columns.
    ========================================================================== */
@@ -331,7 +379,9 @@ body::before {
     padding: 0;
   }
 
-  .menu-nav {
+  .menu-nav,
+  .filter-bar,
+  .filter-status {
     display: none;
   }
 
