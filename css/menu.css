@@ -340,6 +340,27 @@ body::before {
   display: none;
 }
 
+/* Color variants for Food & Drink tags (Game-Friendly reuses .game-tag green) */
+.tag-warning {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.tag-drink {
+  color: #2c5d7c;               /* Subtle slate blue for table-safe drinks */
+  border-color: #2c5d7c;
+}
+
+/* Ensures empty category sections collapse cleanly when filtered out */
+.menu-section[hidden] {
+  display: none;
+}
+
+/* 1-column stack on phones for the 3-item Food Menu Guide */
+.legend-grid-3 {
+  grid-template-columns: 1fr;
+}
+
 /* ==========================================================================
    8. RESPONSIVE MEDIA QUERIES (TABLET & DESKTOP)
    Switches menus from 1 column to 2 columns and expands the legend to 4 columns.
@@ -358,7 +379,10 @@ body::before {
     column-gap: 3rem;
     row-gap: 1.85rem;
   }
-
+  .legend-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
   .legend-grid {
     grid-template-columns: repeat(4, 1fr); /* 4 columns x 2 rows on desktop */
     gap: 1.25rem;

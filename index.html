@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <!-- Viewport meta tag is required for mobile responsiveness -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eat Roll Play — Food Menu</title>
-  <link rel="stylesheet" href="css/menu.css">
+  <title>Eat Roll Play — Food &amp; Drink Menu</title>
+  <!-- Bumped to ?v=4 so desktop browsers pull the new tag colors right away -->
+  <link rel="stylesheet" href="css/menu.css?v=4">
 </head>
 <body>
 
@@ -33,74 +34,407 @@
       <p class="menu-hours">Open Tuesday–Sunday &bull; 11am – 12am</p>
     </header>
 
-    <!-- Menu Category: Starters -->
-    <section class="menu-section" aria-labelledby="starters-heading">
-      <h2 id="starters-heading" class="section-title">Starters</h2>
+    <!-- Filter Buttons: Placed above sections so they always stay visible -->
+    <div class="filter-bar" role="group" aria-label="Filter menu items by game friendliness">
+      <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All Items</button>
+      <button type="button" class="filter-btn" data-filter="game-friendly" aria-pressed="false">🛡️ Game-Friendly</button>
+      <button type="button" class="filter-btn" data-filter="not-game-friendly" aria-pressed="false">⚠️ Not Game-Friendly</button>
+      <button type="button" class="filter-btn" data-filter="table-safe" aria-pressed="false">🥤 Table-Safe Drinks</button>
+    </div>
+
+    <!-- Live item count (data-singular/plural tells filter.js to say "items" instead of "games") -->
+    <p id="filter-status" class="filter-status" data-singular="item" data-plural="items" aria-live="polite">
+      Showing all 27 items
+    </p>
+
+    <!-- ====================================================================
+         SECTION 1: APPETIZERS & SHAREABLES
+         ==================================================================== -->
+    <section class="menu-section" aria-labelledby="apps-heading">
+      <h2 id="apps-heading" class="section-title">Appetizers &amp; Shareables</h2>
 
       <div class="menu-grid">
-        <!-- Menu Item 1 -->
-        <article class="menu-item">
-          <div class="item-header">
-            <h3 class="item-title">
-              Beer-Brined Crispy Wings <span class="dietary-tag" title="Gluten-Free">GF</span>
-            </h3>
-            <span class="item-dots" aria-hidden="true"></span>
-            <span class="item-price">$16.00</span>
+        <!-- Game-Friendly Appetizers -->
+        <article class="menu-item" data-tags="game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Bavarian Pretzel Bites</h3>
+            <div class="game-tags">
+              <span class="game-tag">🛡️ Game-Friendly</span>
+            </div>
           </div>
           <p class="item-description">
-            One pound of double-fried jumbo wings tossed in honey-garlic buffalo or dry Cajun rub. Served with shaved celery and blue cheese dip.
+            Warm soft pretzel nuggets with sea salt, beer-cheese dip, and honey mustard (served with picks).
           </p>
         </article>
 
-        <!-- Menu Item 2 -->
-        <article class="menu-item">
-          <div class="item-header">
-            <h3 class="item-title">
-              Baked Spinach &amp; Artichoke Dip <span class="dietary-tag" title="Vegetarian">V</span>
-            </h3>
-            <span class="item-dots" aria-hidden="true"></span>
-            <span class="item-price">$14.50</span>
+        <article class="menu-item" data-tags="game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Popcorn Chicken Skewers</h3>
+            <div class="game-tags">
+              <span class="game-tag">🛡️ Game-Friendly</span>
+            </div>
           </div>
           <p class="item-description">
-            Baby spinach, roasted artichokes, garlic, and bubbly four-cheese blend. Served warm with seasoned tortilla chips and grilled flatbread wedges.
+            Crispy bite-sized seasoned chicken on wooden skewers with dill ranch.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Crispy Fried Pickles</h3>
+            <div class="game-tags">
+              <span class="game-tag">🛡️ Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Panko-crusted dill spears served with smoky chipotle aioli for dipping.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Edamame with Flaky Sea Salt</h3>
+            <div class="game-tags">
+              <span class="game-tag">🛡️ Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Steamed soybeans with sea salt and toasted sesame oil (pod bowl included).
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Caprese Skewers</h3>
+            <div class="game-tags">
+              <span class="game-tag">🛡️ Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Cherry tomatoes, mini bocconcini, basil, and light balsamic glaze on picks.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Dry-Rubbed Cauliflower Bites</h3>
+            <div class="game-tags">
+              <span class="game-tag">🛡️ Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Roasted cauliflower florets in lemon-pepper or smoky BBQ dry rub.
+          </p>
+        </article>
+
+        <!-- Not Game-Friendly Appetizers -->
+        <article class="menu-item" data-tags="not-game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Classic Pub Chicken Wings</h3>
+            <div class="game-tags">
+              <span class="game-tag tag-warning">⚠️ Not Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Tossed in sticky Honey Garlic, Hot Sauce, Mango Habanero, or Teriyaki.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="not-game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Loaded "Tower of Doom" Nachos</h3>
+            <div class="game-tags">
+              <span class="game-tag tag-warning">⚠️ Not Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Tortilla chips piled high with melted cheese, jalapeños, olives, salsa, and sour cream.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="not-game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Classic Poutine</h3>
+            <div class="game-tags">
+              <span class="game-tag tag-warning">⚠️ Not Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Hand-cut fries smothered in cheese curds and hot gravy.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="not-game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Cheeto-Dusted Mozzarella Sticks</h3>
+            <div class="game-tags">
+              <span class="game-tag tag-warning">⚠️ Not Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Fried mozzarella coated in crushed spicy cheese puffs with marinara.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="not-game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Pulled Pork Loaded Fries</h3>
+            <div class="game-tags">
+              <span class="game-tag tag-warning">⚠️ Not Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Fries topped with slow-roasted BBQ pulled pork, slaw, and chipotle drizzle.
           </p>
         </article>
       </div>
     </section>
 
-    <!-- Menu Category: Mains -->
+    <!-- ====================================================================
+         SECTION 2: MAINS & ENTRÉES
+         ==================================================================== -->
     <section class="menu-section" aria-labelledby="mains-heading">
-      <h2 id="mains-heading" class="section-title">Mains</h2>
+      <h2 id="mains-heading" class="section-title">Mains &amp; Entrées</h2>
 
       <div class="menu-grid">
-        <!-- Menu Item 3 -->
-        <article class="menu-item">
-          <div class="item-header">
-            <h3 class="item-title">The Classic Smash Burger</h3>
-            <span class="item-dots" aria-hidden="true"></span>
-            <span class="item-price">$24.00</span>
+        <!-- Game-Friendly Mains -->
+        <article class="menu-item" data-tags="game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Crispy Chicken Caesar Wrap</h3>
+            <div class="game-tags">
+              <span class="game-tag">🛡️ Game-Friendly</span>
+            </div>
           </div>
           <p class="item-description">
-            Two seared beef patties, aged white cheddar, sweet onion jam, crisp pickles, and smoked garlic aioli on a toasted brioche bun. Served with hand-cut fries.
+            Grilled or crispy chicken, romaine, bacon, and parmesan cut into neat pinwheels.
           </p>
         </article>
 
-        <!-- Menu Item 4 -->
-        <article class="menu-item">
-          <div class="item-header">
-            <h3 class="item-title">
-              Stout-Glazed Baby Back Ribs <span class="dietary-tag" title="Gluten-Free">GF</span>
-            </h3>
-            <span class="item-dots" aria-hidden="true"></span>
-            <span class="item-price">$28.00</span>
+        <article class="menu-item" data-tags="game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Pub Steak &amp; Mushroom Pie</h3>
+            <div class="game-tags">
+              <span class="game-tag">🛡️ Game-Friendly</span>
+            </div>
           </div>
           <p class="item-description">
-            Half rack of slow-braised pork ribs brushed with sticky stout barbecue glaze. Served alongside creamy apple cider slaw and spiced potato wedges.
+            Braised beef and mushrooms in stout gravy under a flaky puff pastry crust.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Mac &amp; Cheese Skillet</h3>
+            <div class="game-tags">
+              <span class="game-tag">🛡️ Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Cavatappi pasta in a three-cheese sauce with toasted herb-panko topping.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Grilled Halloumi Power Bowl</h3>
+            <div class="game-tags">
+              <span class="game-tag">🛡️ Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Seared halloumi, roasted sweet potatoes, avocado, cucumber, and lemon-herb dressing.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Mini Sliders (Trio)</h3>
+            <div class="game-tags">
+              <span class="game-tag">🛡️ Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Three bite-sized beef or pulled-jackfruit sliders on picks with cheddar and caramelized onions.
+          </p>
+        </article>
+
+        <!-- Not Game-Friendly Mains -->
+        <article class="menu-item" data-tags="not-game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">The "Critical Hit" Smash Burger</h3>
+            <div class="game-tags">
+              <span class="game-tag tag-warning">⚠️ Not Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Double smashed patties, American cheese, bacon jam, pickles, and burger sauce on brioche.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="not-game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Nashville Hot Chicken Sandwich</h3>
+            <div class="game-tags">
+              <span class="game-tag tag-warning">⚠️ Not Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Crispy chicken thigh drenched in spicy chili oil with slaw and pickles.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="not-game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">French Dip Roast Beef Sandwich</h3>
+            <div class="game-tags">
+              <span class="game-tag tag-warning">⚠️ Not Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Shaved roast beef and melted Swiss on a crusty baguette with hot au jus.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="not-game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">BBQ Baby Back Ribs</h3>
+            <div class="game-tags">
+              <span class="game-tag tag-warning">⚠️ Not Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Tender pork ribs basted in smoky barbecue sauce with fries and cornbread.
           </p>
         </article>
       </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 3: DESSERTS
+         ==================================================================== -->
+    <section class="menu-section" aria-labelledby="desserts-heading">
+      <h2 id="desserts-heading" class="section-title">Desserts</h2>
+
+      <div class="menu-grid">
+        <!-- Game-Friendly Sweets -->
+        <article class="menu-item" data-tags="game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Cinnamon Sugar Churro Bites</h3>
+            <div class="game-tags">
+              <span class="game-tag">🛡️ Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Bite-sized cinnamon-sugar pastry puffs with warm chocolate ganache for dipping.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Mini Cheesecake Bites</h3>
+            <div class="game-tags">
+              <span class="game-tag">🛡️ Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Bite-sized New York, berry swirl, and turtle cheesecakes in paper cups.
+          </p>
+        </article>
+
+        <!-- Not Game-Friendly Sweets -->
+        <article class="menu-item" data-tags="not-game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">Warm Sticky Toffee Pudding</h3>
+            <div class="game-tags">
+              <span class="game-tag tag-warning">⚠️ Not Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Rich date cake with warm butterscotch sauce and vanilla bean ice cream.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="not-game-friendly">
+          <div class="game-header">
+            <h3 class="item-title">S’mores Skillet Dip</h3>
+            <div class="game-tags">
+              <span class="game-tag tag-warning">⚠️ Not Game-Friendly</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Melted chocolate chips topped with toasted marshmallows and graham crackers.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 4: DRINKS
+         ==================================================================== -->
+    <section class="menu-section" aria-labelledby="drinks-heading">
+      <h2 id="drinks-heading" class="section-title">Drinks</h2>
+
+      <div class="menu-grid">
+        <article class="menu-item" data-tags="table-safe">
+          <div class="game-header">
+            <h3 class="item-title">Draft Beer &amp; Cider Flights</h3>
+            <div class="game-tags">
+              <span class="game-tag tag-drink">🥤 Table-Safe</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Four 5 oz pours in a recessed wooden paddle.
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="table-safe">
+          <div class="game-header">
+            <h3 class="item-title">House Sodas &amp; Mocktails</h3>
+            <div class="game-tags">
+              <span class="game-tag tag-drink">🥤 Table-Safe</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Mana Potion (blueberry lavender lemonade), Health Potion (strawberry basil fizz), and Stamina Brew (cold brew with vanilla cream).
+          </p>
+        </article>
+
+        <article class="menu-item" data-tags="table-safe">
+          <div class="game-header">
+            <h3 class="item-title">Hot Teas &amp; Espresso</h3>
+            <div class="game-tags">
+              <span class="game-tag tag-drink">🥤 Table-Safe</span>
+            </div>
+          </div>
+          <p class="item-description">
+            Served in wide-base mugs.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Bottom Legend: Matches the Game Guide on boardgames.html -->
+    <section class="game-legend" aria-labelledby="food-legend-heading">
+      <h2 id="food-legend-heading" class="legend-title">Menu Guide</h2>
+
+      <ul class="legend-grid legend-grid-3">
+        <li class="legend-item">
+          <strong>🛡️ Game-Friendly</strong>
+          Clean fingers, fork-friendly &amp; safe for cards
+        </li>
+        <li class="legend-item">
+          <strong>⚠️ Not Game-Friendly</strong>
+          Two-handed &amp; saucy — best eaten between rounds
+        </li>
+        <li class="legend-item">
+          <strong>🥤 Table-Safe Drinks</strong>
+          Sturdy glassware &amp; paddles built for game tables
+        </li>
+      </ul>
     </section>
   </main>
 
+  <!-- Shared filter script (bump ?v=2 so browsers pull the updated version) -->
+  <script src="js/filter.js?v=2"></script>
 </body>
 </html>

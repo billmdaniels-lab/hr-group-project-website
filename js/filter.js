@@ -1,27 +1,31 @@
 /* ==========================================================================
-   BOARD GAME TAG FILTER
-   Shows or hides game cards based on which category button is clicked.
+   SHARED MENU TAG FILTER
+   Works on both index.html (food/drinks) and boardgames.html (board games).
    ========================================================================== */
 
 // 1. Grab the HTML elements we need to work with
 const filterButtons = document.querySelectorAll('.filter-btn');
-const gameCards = document.querySelectorAll('.menu-item[data-tags]');
+const filterCards = document.querySelectorAll('.menu-item[data-tags]');
+const menuSections = document.querySelectorAll('.menu-section');
 const statusText = document.getElementById('filter-status');
 
-// 2. Define the function that filters the cards
-function filterGames(selectedTag, buttonLabel) {
+// Read custom labels if provided in HTML; default to "game"/"games" for boardgames.html
+const singularLabel = statusText.dataset.singular || 'game';
+const pluralLabel = statusText.dataset.plural || 'games';
+
+// 2. Define the function that filters the cards and hides empty sections
+function filterItems(selectedTag, buttonLabel) {
   let visibleCount = 0;
 
-  // Check each game card one by one
-  gameCards.forEach((card) => {
-    // Read the card's data-tags attribute and split it into an array of words
-    // Example: "fast-game card-game" becomes ["fast-game", "card-game"]
+  // Check each card one by one
+  filterCards.forEach((card) => {
+    // Split space-separated tags into an array (e.g. ["game-friendly"])
     const cardTags = card.dataset.tags.split(' ');
 
-    // Show the card if "all" is selected OR if the card's tags include the clicked tag
+    // Show the card if "all" is selected OR if its tags include the clicked filter
     const isMatch = selectedTag === 'all' || cardTags.includes(selectedTag);
 
-    // Toggle the HTML "hidden" attribute (true hides the card, false shows it)
+    // Toggle the HTML "hidden" attribute
     card.hidden = !isMatch;
 
     if (isMatch) {
@@ -29,28 +33,35 @@ function filterGames(selectedTag, buttonLabel) {
     }
   });
 
-  // 3. Update the helper text below the buttons (also announces changes to screen readers)
-  const gameWord = visibleCount === 1 ? 'game' : 'games';
+  // Hide any section heading whose cards are all currently hidden
+  menuSections.forEach((section) => {
+    const sectionCards = section.querySelectorAll('.menu-item[data-tags]');
+    if (sectionCards.length > 0) {
+      const hasVisibleCard = section.querySelector('.menu-item[data-tags]:not([hidden])');
+      section.hidden = !hasVisibleCard;
+    }
+  });
+
+  // 3. Update the helper text below the buttons
+  const itemWord = visibleCount === 1 ? singularLabel : pluralLabel;
 
   if (selectedTag === 'all') {
-    statusText.textContent = `Showing all ${visibleCount} ${gameWord}`;
+    statusText.textContent = `Showing all ${visibleCount} ${itemWord}`;
   } else {
-    statusText.textContent = `Showing ${visibleCount} ${gameWord} for "${buttonLabel}"`;
+    statusText.textContent = `Showing ${visibleCount} ${itemWord} for "${buttonLabel}"`;
   }
 }
 
 // 4. Attach a click listener to every filter button
 filterButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    // Turn off the active state on all buttons, then turn it on for the clicked one
+    // Turn off the active state on all buttons, then activate the clicked one
     filterButtons.forEach((btn) => btn.setAttribute('aria-pressed', 'false'));
     button.setAttribute('aria-pressed', 'true');
 
-    // Read the tag name stored in data-filter (e.g., "fast-game") and button text
     const selectedTag = button.dataset.filter;
     const buttonLabel = button.textContent.trim();
 
-    // Run the filter
-    filterGames(selectedTag, buttonLabel);
+    filterItems(selectedTag, buttonLabel);
   });
 });
